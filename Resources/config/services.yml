@@ -1,0 +1,9 @@
+services:
+    abc.job.job_consumer:
+        class: Abc\Job\Interop\JobConsumer
+        public: true
+        arguments:
+            - '@abc.job.processor_registry'
+            - '@logger'
+        tags:
+            - { name: 'enqueue.transport.processor', processor: 'job' }

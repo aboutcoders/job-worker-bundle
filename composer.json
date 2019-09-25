@@ -1,0 +1,31 @@
+{
+  "name": "aboutcoders/worker-bundle",
+  "type": "symfony-bundle",
+  "description": "A Symfony bundle for asynchronous distributed job processing",
+  "keywords": ["job", "asynchronous", "distributed", "queue", "broker"],
+  "homepage": "http://aboutcoders.com",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Hannes Schulz",
+      "email": "hannes.schulz@aboutcoders.com"
+    }
+  ],
+  "require": {
+    "php": "^7.1",
+    "symfony/framework-bundle": "^3.4|^4",
+    "abc/job": "dev-master"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.0",
+    "enqueue/enqueue-bundle": "^0.9"
+  },
+  "autoload": {
+    "psr-4": { "Abc\\WorkerBundle\\": "" },
+    "exclude-from-classmap": [
+      "/Tests/"
+    ]
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
