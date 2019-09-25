@@ -1,13 +1,13 @@
 <?php
 
-namespace Abc\WorkerBundle;
+namespace Abc\AbcJobWorkerBundle;
 
-use Abc\WorkerBundle\DependencyInjection\Compiler\BuildJobProcessorPass;
-use Abc\WorkerBundle\DependencyInjection\Compiler\BuildJobSubscriberPass;
+use Abc\AbcJobWorkerBundle\DependencyInjection\Compiler\BuildJobProcessorPass;
+use Abc\AbcJobWorkerBundle\DependencyInjection\Compiler\BuildJobSubscriberPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class AbcWorkerBundle extends Bundle
+class AbcJobWorkerBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {

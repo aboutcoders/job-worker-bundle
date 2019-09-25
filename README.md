@@ -1,13 +1,13 @@
-# AbcWorkerBundle
+# AbcJobWorkerBundle
 
-A symfony bundle to process managed by AbcJobBundle using [php-enqueue](https://github.com/php-enqueue/enqueue-dev) as transport layer.
+A symfony bundle to process jobs managed by AbcJobServerBundle using [php-enqueue](https://github.com/php-enqueue/enqueue-dev) as transport layer.
 
-We're working on the first stable release. Please excuse the poor documentation. We're also looking for contributors that support the project.
+**Note: This project is still in an experimental phase!**
 
 ## Installation
 
 ```bash
-composer require abc/worker-bundle
+composer require abc/job-worker-bundle
 ```
 
 ## Demo Docker Project
@@ -17,8 +17,8 @@ Please take a look at [job-docker-compose](https://gitlab.com/hasc/job-docker-co
 ## Getting Started
 
 ### Prerequisites
-1. Configure a Symfony application with AbcJobBundle
-2. Configure the enqueue transport layer corresponding to the configuration in AbcJobBundle
+1. Configure a Symfony application with AbcJobServerBundle
+2. Configure the enqueue transport layer corresponding to the configuration in AbcJobServerBundle
 
 ### Create a job processor
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Abc\WorkerBundle\DependencyInjection;
+namespace Abc\AbcJobWorkerBundle\DependencyInjection;
 
 use Abc\Job\Processor\ProcessorRegistry;
 use Abc\Job\Symfony\DiUtils;

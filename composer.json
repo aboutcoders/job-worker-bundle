@@ -1,7 +1,7 @@
 {
-  "name": "abc/worker-bundle",
+  "name": "abc/job-worker-bundle",
   "type": "symfony-bundle",
-  "description": "A Symfony bundle for asynchronous distributed job processing",
+  "description": "A Symfony to process jobs from AbcJobServerBundle",
   "keywords": ["job", "asynchronous", "distributed", "queue", "broker"],
   "homepage": "http://aboutcoders.com",
   "license": "MIT",
@@ -21,7 +21,7 @@
     "enqueue/enqueue-bundle": "^0.9"
   },
   "autoload": {
-    "psr-4": { "Abc\\WorkerBundle\\": "" },
+    "psr-4": { "Abc\\JobWorkerBundle\\": "" },
     "exclude-from-classmap": [
       "/Tests/"
     ]
