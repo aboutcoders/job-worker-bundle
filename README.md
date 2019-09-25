@@ -4,6 +4,12 @@ A symfony bundle to process managed by AbcJobBundle using [php-enqueue](https://
 
 We're working on the first stable release. Please excuse the poor documentation. We're also looking for contributors that support the project.
 
+## Installation
+
+```bash
+composer require abc/worker-bundle
+```
+
 ## Demo Docker Project
 
 Please take a look at [job-docker-compose](https://gitlab.com/hasc/job-docker-compose) and start a demo application using docker-compose in a couple of minutes.
