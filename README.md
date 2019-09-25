@@ -74,7 +74,6 @@ The following command will consume jobs from the default queue `abc.job`.
 bin/console enqueue:transport:consume job abc.job
 ```
 
-## ToDo
-* CompilePass for JobSubscriberInterface
-* How to limit jobs
-* How to consume from multiple queues (just test it)
+## License
+
+The MIT License (MIT). Please see [License File](./LICENSE) for more information.
