@@ -1,5 +1,5 @@
 {
-  "name": "aboutcoders/worker-bundle",
+  "name": "abc/worker-bundle",
   "type": "symfony-bundle",
   "description": "A Symfony bundle for asynchronous distributed job processing",
   "keywords": ["job", "asynchronous", "distributed", "queue", "broker"],
