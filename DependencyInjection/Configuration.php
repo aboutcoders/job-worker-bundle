@@ -13,11 +13,11 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         if (method_exists(TreeBuilder::class, 'getRootNode')) {
-            $tb = new TreeBuilder('abc_worker');
+            $tb = new TreeBuilder('abc_job_worker');
             $rootNode = $tb->getRootNode();
         } else {
             $tb = new TreeBuilder();
-            $rootNode = $tb->root('abc_worker');
+            $rootNode = $tb->root('abc_job_worker');
         }
 
         $rootNode

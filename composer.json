@@ -26,6 +26,11 @@
       "/Tests/"
     ]
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Abc\\JobWorkerBundle\\Tests\\": "Tests/"
+    }
+  },
   "minimum-stability": "dev",
   "prefer-stable": true
 }
