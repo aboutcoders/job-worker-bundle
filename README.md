@@ -35,8 +35,8 @@ You can register a job processor using the tag `abc.job.processor`. You must def
 
 ```yaml
 App\Job\SayHelloProcessor:
-	tags:
-		- { name: 'abc.job.processor', jobName: 'say_hello'}
+    tags:
+        - { name: 'abc.job.processor', jobName: 'say_hello'}
 ```
 
 #### Register a job subscriber processor
@@ -59,9 +59,9 @@ Tag the service in the container with `abc.job_subscriber` tag:
 
 ```yaml
 services:
-  App\Job\GenericProcessor:
-    tags:
-        - { name: 'abc.job.subscriber' }
+    App\Job\GenericProcessor:
+        tags:
+            - { name: 'abc.job.subscriber' }
 ```
 
 ### Process jobs
