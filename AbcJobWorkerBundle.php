@@ -1,9 +1,9 @@
 <?php
 
-namespace Abc\AbcJobWorkerBundle;
+namespace Abc\JobWorkerBundle;
 
-use Abc\AbcJobWorkerBundle\DependencyInjection\Compiler\BuildJobProcessorPass;
-use Abc\AbcJobWorkerBundle\DependencyInjection\Compiler\BuildJobSubscriberPass;
+use Abc\JobWorkerBundle\DependencyInjection\Compiler\BuildJobProcessorPass;
+use Abc\JobWorkerBundle\DependencyInjection\Compiler\BuildJobSubscriberPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

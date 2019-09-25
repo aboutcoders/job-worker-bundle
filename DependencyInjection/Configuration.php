@@ -1,6 +1,6 @@
 <?php
 
-namespace Abc\AbcJobWorkerBundle\DependencyInjection;
+namespace Abc\JobWorkerBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

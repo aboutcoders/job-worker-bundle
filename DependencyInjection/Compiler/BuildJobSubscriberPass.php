@@ -1,6 +1,6 @@
 <?php
 
-namespace Abc\AbcJobWorkerBundle\DependencyInjection\Compiler;
+namespace Abc\JobWorkerBundle\DependencyInjection\Compiler;
 
 use Abc\Job\JobSubscriberInterface;
 use Abc\Job\Symfony\DiUtils;
