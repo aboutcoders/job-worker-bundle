@@ -22,6 +22,13 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->scalarNode('server_baseUrl')
+                    ->cannotBeEmpty()
+                    ->isRequired()
+                    ->info('The URL of the job server')
+                ->end()
+                ->scalarNode('default_queue')->defaultValue('default')->end()
+                ->scalarNode('default_replyTo')->defaultValue('reply')->end()
                 ->scalarNode('jobs')->defaultNull()->end()
             ->end();
 
