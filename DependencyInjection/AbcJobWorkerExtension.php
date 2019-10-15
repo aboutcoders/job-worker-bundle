@@ -48,6 +48,7 @@ class AbcJobWorkerExtension extends Extension
         // RouteClient
         $container->register($diUtils->format('route_client'), RouteClient::class)
             ->addArgument(new Reference($diUtils->format('http_route_client')))
+            ->addArgument(new Reference('logger'))
         ;
 
         // RegisterRoutesExtension
