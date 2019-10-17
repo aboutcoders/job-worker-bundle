@@ -54,10 +54,10 @@ class BuildRouteProviderPass implements CompilerPassInterface
             }
             else {
                 foreach ($routes as $route) {
-                    if (! isset($routes['name'])) {
+                    if (! isset($route['name'])) {
                         throw new \LogicException('Route provider configuration is invalid. Array key "name" must be set.');
                     }
-                    $routeCollection->add(new Route($routes['name'], $routes['queue'] ?? $defaultQueue, $routes['replyTo'] ?? $defaultReplyTo));
+                    $routeCollection->add(new Route($route['name'], $route['queue'] ?? $defaultQueue, $route['replyTo'] ?? $defaultReplyTo));
                 }
             }
         }
