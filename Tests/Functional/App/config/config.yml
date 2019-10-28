@@ -1,0 +1,51 @@
+framework:
+  test: ~
+  secret: 'secret'
+  session:
+    enabled: false
+  csrf_protection:
+    enabled: false
+  form:
+    enabled: false
+  profiler:
+    enabled: false
+  translator:
+    enabled: false
+  workflows:
+    enabled: false
+
+enqueue:
+  default:
+    transport: 'null:'
+    client: ~
+
+abc_job_worker:
+  server_baseUrl: http://job-server.tld/api
+
+services:
+
+  app.http_route_client.mock_handler:
+    class: GuzzleHttp\Handler\MockHandler
+    public: true
+
+  app.http_route_client.handler_stack:
+    class: GuzzleHttp\HandlerStack
+    public: true
+    arguments: ['@app.http_route_client.mock_handler']
+
+  abc.job.http_route_client_client:
+    class: GuzzleHttp\Client
+    arguments:
+      - { handler: '@app.http_route_client.handler_stack' }
+
+  app.jobA:
+    class: Abc\Job\Processor\TestProcessor
+    public: true
+    tags:
+      - { name: 'abc.job.processor', jobName: 'jobA'}
+
+  app.jobB:
+    class: Abc\Job\Processor\TestProcessor
+    public: true
+    tags:
+      - { name: 'abc.job.processor', jobName: 'jobB'}

@@ -27,8 +27,6 @@ class AbcJobWorkerExtension extends Extension
 
         $diUtils = DiUtils::create();
 
-        $configId = $diUtils->format('config');
-
         $container->setParameter($diUtils->parameter('default_queue'), $config['default_queue']);
         $container->setParameter($diUtils->parameter('default_replyTo'), $config['default_replyTo']);
 
@@ -57,9 +55,6 @@ class AbcJobWorkerExtension extends Extension
             ->addArgument(new Reference($diUtils->format('route_collection')))
             ->addTag('enqueue.transport.consumption_extension')
         ;
-
-        /*$container->getDefinition($diUtils->format('job_consumer'))
-            ->addMethodCall('limitJobs', $config['jobs']);*/
 
         $processorRegistryId = $diUtils->format('processor_registry');
         $container->register($processorRegistryId, ProcessorRegistry::class);
