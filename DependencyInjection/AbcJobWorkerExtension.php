@@ -3,10 +3,10 @@
 namespace Abc\JobWorkerBundle\DependencyInjection;
 
 use Abc\Job\Broker\RouteCollection;
+use Abc\Job\Client\HttpRouteClient;
+use Abc\Job\Client\RouteClient;
 use Abc\Job\Enqueue\Consumption\RegisterRoutesExtension;
-use Abc\Job\HttpRouteClient;
 use Abc\Job\Processor\ProcessorRegistry;
-use Abc\Job\RouteClient;
 use Abc\Job\Symfony\DiUtils;
 use GuzzleHttp\Client;
 use Symfony\Component\Config\FileLocator;

@@ -2,17 +2,17 @@
 
 A symfony bundle to process jobs managed by AbcJobServerBundle using [php-enqueue](https://github.com/php-enqueue/enqueue-dev) as transport layer.
 
-**Note: This project is still in an experimental phase!**
+**Note: This project is still in experimental!**
+
+## Demo
+
+Please take a look at [job-docker-compose](https://gitlab.com/hasc/job-docker-compose) and start a demo application within a couple of minutes.
 
 ## Installation
 
 ```bash
 composer require abc/job-worker-bundle
 ```
-
-## Demo Docker Project
-
-Please take a look at [job-docker-compose](https://gitlab.com/hasc/job-docker-compose) and start a demo application using docker-compose in a couple of minutes.
 
 ## Configuration Reference
 
@@ -25,7 +25,7 @@ abc_job_worker:
 
 ### Prerequisites
 1. A Symfony application with AbcJobServerBundle installed
-2. Enqueue transport is configured
+2. Enqueue transport is configured matching the configuration of AbcJobServerBundle
 
 ### Create a job processor
 
@@ -50,7 +50,7 @@ App\Job\SayHelloProcessor:
 
 ### Configure job routes
 
-A route must be configured for every job. A route consist of three parameters: `name` specifies the the name of the job, `queue` specifies the name of the queue the job is sent to, `replyTo` specifies the name of the queue where the job sends it's replies.
+A route must be configured for every job. A route consist of three parameters: `name` specifies the the name of the job, `queue` specifies the name of the queue the job is sent to, `replyTo` specifies the name of the queue where the reply of a job is sent to.
 
 Routes are configured by a class that implements the interface `RouteProviderInterface`.
 
@@ -96,15 +96,27 @@ App\JobRoutes:
 
 ### Process jobs
 
-The bundle uses [php-enqueue](https://github.com/php-enqueue/enqueue-dev) as transport layer, thus the worker is started by using the enqueue consume command.
+There are two commands to process a job: `abc:process:queue` and `abc:process:job`. 
 
-The following command will consume jobs from the default queue `queue_A`.
+### Command `abc:process:queue`
+
+The command `abc:process:queue` processes jobs one or more queues. It will process all jobs that have been registered.
 
 ```bash
-bin/console enqueue:transport:consume job queue_A
+bin/console abc:process:queue someQueue
 ```
 
-Before consumptions starts the routes the job server is informed about all routes configured in the worker and will route the jobs according to the provided configuration.
+You can provide a single queue name or an array of queues as argument.
+
+### Command `abc:process:job`
+
+The command `abc:process:job` processes one or more specific jobs, that have to be specified by name.
+
+```bash
+bin/console abc:process:job someJob
+```
+
+You can provide a single job name or an array of job names as argument.
 
 ## License
 
