@@ -1,5 +1,7 @@
 # AbcJobWorkerBundle
 
+[![Build Status](https://travis-ci.org/aboutcoders/job-worker-bundle.png?branch=master)](https://travis-ci.org/aboutcoders/job-worker-bundle)
+
 A symfony bundle to process jobs managed by AbcJobServerBundle using [php-enqueue](https://github.com/php-enqueue/enqueue-dev) as transport layer.
 
 **Note: This project is still in experimental!**
