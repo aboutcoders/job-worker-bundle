@@ -1,8 +1,14 @@
 # AbcJobWorkerBundle
 
+[![Build Status](https://travis-ci.org/aboutcoders/job-worker-bundle.png?branch=master)](https://travis-ci.org/aboutcoders/job-worker-bundle)
+
 A symfony bundle to process jobs managed by AbcJobServerBundle using [php-enqueue](https://github.com/php-enqueue/enqueue-dev) as transport layer.
 
-**Note: This project is still in an experimental phase!**
+**Note: This project is still in experimental!**
+
+## Demo
+
+Please take a look at [job-docker-compose](https://gitlab.com/hasc/job-docker-compose) and start a demo application within a couple of minutes.
 
 ## Installation
 
@@ -10,15 +16,18 @@ A symfony bundle to process jobs managed by AbcJobServerBundle using [php-enqueu
 composer require abc/job-worker-bundle
 ```
 
-## Demo Docker Project
+## Configuration Reference
 
-Please take a look at [job-docker-compose](https://gitlab.com/hasc/job-docker-compose) and start a demo application using docker-compose in a couple of minutes.
+```yaml
+abc_job_worker:
+    server_baseUrl: 'http://domain.tld/job'
+```
 
 ## Getting Started
 
 ### Prerequisites
-1. Configure a Symfony application with AbcJobServerBundle
-2. Configure the enqueue transport layer corresponding to the configuration in AbcJobServerBundle
+1. A Symfony application with AbcJobServerBundle installed
+2. Enqueue transport is configured matching the configuration of AbcJobServerBundle
 
 ### Create a job processor
 
@@ -33,11 +42,7 @@ interface ProcessorInterface
 
 ### Register a job processor
 
-There are two options to register a job processor.
-
-#### Register a job processor using a tag
-
-You can register a job processor using the tag `abc.job.processor`. You must define the tag attribute `jobName` with it which defines the name of the job that must be processed with this processor.
+A job processor must be registered using the tag `abc.job.processor`. You must define the tag attribute `jobName` with it which defines the name of the job that must be processed with this processor.
 
 ```yaml
 App\Job\SayHelloProcessor:
@@ -45,40 +50,75 @@ App\Job\SayHelloProcessor:
         - { name: 'abc.job.processor', jobName: 'say_hello'}
 ```
 
-#### Register a job subscriber processor
+### Configure job routes
 
-There is also a `JobSubscriberInterface` to bind a processor to a job name.
+A route must be configured for every job. A route consist of three parameters: `name` specifies the the name of the job, `queue` specifies the name of the queue the job is sent to, `replyTo` specifies the name of the queue where the reply of a job is sent to.
+
+Routes are configured by a class that implements the interface `RouteProviderInterface`.
 
 ```php
-namespace App\Job;
+<?php
 
-class GenericProcessor implements ProcessorInterface, JobSubscriberInterface
+namespace App;
+
+use Abc\Job\RouteProviderInterface;
+
+class JobRoutes implements RouteProviderInterface
+{
+    public static function getRoutes()
     {
-        public static function getSubscribedJob()
-        {
-            return ['say_hello', 'say_goodbye'];
-        }
+        return [
+            [
+                'name' => 'job_A',
+                'queue' => 'queue_A',
+                'replyTo' => 'reply_default',
+            ],
+            [
+                'name' => 'job_B',
+                'queue' => 'queue_B',
+                'replyTo' => 'reply_default',
+            ],
+            [
+                'name' => 'job_C',
+                'queue' => 'queue_B',
+                'replyTo' => 'reply_C',
+            ],
+        ];
     }
+}
 ```
 
-Tag the service in the container with `abc.job_subscriber` tag:
+A route provider must be registered using the tag `abc.job.route_provider`.
 
 ```yaml
-services:
-    App\Job\GenericProcessor:
-        tags:
-            - { name: 'abc.job.subscriber' }
+App\JobRoutes:
+    tags:
+        - { name: 'abc.job.route_provider'}
 ```
 
 ### Process jobs
 
-The bundle uses [php-enqueue](https://github.com/php-enqueue/enqueue-dev) as transport layer, thus the worker is started by using the enqueue consume command.
+There are two commands to process a job: `abc:process:queue` and `abc:process:job`. 
 
-The following command will consume jobs from the default queue `abc.job`.
+### Command `abc:process:queue`
+
+The command `abc:process:queue` processes jobs one or more queues. It will process all jobs that have been registered.
 
 ```bash
-bin/console enqueue:transport:consume job abc.job
+bin/console abc:process:queue someQueue
 ```
+
+You can provide a single queue name or an array of queues as argument.
+
+### Command `abc:process:job`
+
+The command `abc:process:job` processes one or more specific jobs, that have to be specified by name.
+
+```bash
+bin/console abc:process:job someJob
+```
+
+You can provide a single job name or an array of job names as argument.
 
 ## License
 

@@ -7,3 +7,20 @@ services:
             - '@logger'
         tags:
             - { name: 'enqueue.transport.processor', processor: 'job' }
+
+    abc.job.process_queue_command:
+        class: 'Abc\Job\Symfony\Command\ProcessQueueCommand'
+        arguments:
+            - '@enqueue.transport.consume_command'
+        tags:
+            - { name: 'console.command' }
+
+    abc.job.process_job_command:
+        class: 'Abc\Job\Symfony\Command\ProcessJobCommand'
+        arguments:
+            - '@abc.job.processor_registry'
+            - '@abc.job.route_client'
+            - '@abc.job.job_consumer'
+            - '@enqueue.transport.consume_command'
+        tags:
+            - { name: 'console.command' }
