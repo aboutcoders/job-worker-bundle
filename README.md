@@ -8,7 +8,7 @@ A symfony bundle to process jobs managed by AbcJobServerBundle using [php-enqueu
 
 ## Demo
 
-Please take a look at [job-docker-compose](https://gitlab.com/hasc/job-docker-compose) and start a demo application within a couple of minutes.
+You can find a demo [here](https://gitlab.com/hasc/abc-job-demo/).
 
 ## Installation
 
