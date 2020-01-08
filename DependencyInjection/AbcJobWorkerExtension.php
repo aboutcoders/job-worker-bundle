@@ -5,6 +5,7 @@ namespace Abc\JobWorkerBundle\DependencyInjection;
 use Abc\Job\Broker\RouteCollection;
 use Abc\Job\Client\HttpRouteClient;
 use Abc\Job\Client\RouteClient;
+use Abc\Job\Client\RouteHttpClient;
 use Abc\Job\Enqueue\Consumption\RegisterRoutesExtension;
 use Abc\Job\Processor\ProcessorRegistry;
 use Abc\Job\Symfony\DiUtils;
@@ -38,7 +39,7 @@ class AbcJobWorkerExtension extends Extension
         // Client
         $container->register($diUtils->format('http_route_client_client'), Client::class);
 
-        $container->register($diUtils->format('http_route_client'), HttpRouteClient::class)
+        $container->register($diUtils->format('http_route_client'), RouteHttpClient::class)
             ->addArgument($config['server_baseUrl'])
             ->addArgument(new Reference($diUtils->format('http_route_client_client')))
         ;
