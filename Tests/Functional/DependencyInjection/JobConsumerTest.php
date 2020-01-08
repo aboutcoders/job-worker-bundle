@@ -17,6 +17,7 @@ class JobConsumerTest extends WebTestCase
         $diUtils = new DiUtils();
 
         $consumer = static::$container->get($diUtils->format('job_consumer'));
+
         $this->assertInstanceOf(JobConsumer::class, $consumer);
         $this->assertInstanceOf(Processor::class, $consumer);
     }

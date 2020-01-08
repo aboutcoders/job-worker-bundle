@@ -22,16 +22,16 @@ abstract class WebTestCase extends BaseWebTestCase
     protected function setUp()
     {
         parent::setUp();
+
         static::$class = null;
         static::$client = static::createClient();
-        static::$container = static::$container ?: static::$kernel->getContainer();
+        static::$container = static::$kernel->getContainer();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
+        static::ensureKernelShutdown();
         static::$client = null;
-        static::$kernel = null;
-        static::$container = null;
     }
 
     /**
@@ -40,7 +40,6 @@ abstract class WebTestCase extends BaseWebTestCase
     public static function getKernelClass()
     {
         include_once __DIR__.'/App/AppKernel.php';
-
         return AppKernel::class;
     }
 }
