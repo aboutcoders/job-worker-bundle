@@ -105,20 +105,26 @@ There are two commands to process a job: `abc:process:queue` and `abc:process:jo
 The command `abc:process:queue` processes jobs one or more queues. It will process all jobs that have been registered.
 
 ```bash
-bin/console abc:process:queue someQueue
+bin/console abc:process:queue --help
 ```
 
 You can provide a single queue name or an array of queues as argument.
 
 ### Command `abc:process:job`
 
-The command `abc:process:job` processes one or more specific jobs, that have to be specified by name.
+The command `abc:process:job` processes one or more specific jobs, that have to be specified by name. You can provide a single job name or an array of job names as argument.
 
 ```bash
-bin/console abc:process:job someJob
+bin/console abc:process:job --help
 ```
 
-You can provide a single job name or an array of job names as argument.
+### Command `abc:routes:register`
+
+The command `abc:routes:register` registers routes defined by a route provider on the server. Existing routes are overwritten but not deleted.
+
+```bash
+bin/console abc:process:job --help
+```
 
 ## License
 

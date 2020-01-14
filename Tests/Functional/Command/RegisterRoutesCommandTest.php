@@ -20,7 +20,7 @@ class RegisterRoutesCommandTest extends KernelTestCase
     {
         $application = new Application(static::$kernel);
 
-        $command = $application->find('abc:register:routes');
+        $command = $application->find('abc:routes:register');
 
         $input = [
             'command' => $command->getName(),
@@ -35,7 +35,7 @@ class RegisterRoutesCommandTest extends KernelTestCase
         // the output of the command in the console
         $output = $commandTester->getDisplay();
 
-        $this->assertContains('No routes to register', $output);
+        $this->assertContains('No routes defined', $output);
     }
 
     protected function mockRouteClientResponse(): void
