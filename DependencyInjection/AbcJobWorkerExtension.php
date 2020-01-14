@@ -50,13 +50,6 @@ class AbcJobWorkerExtension extends Extension
             ->addArgument(new Reference('logger'))
         ;
 
-        // RegisterRoutesExtension
-        $container->register($diUtils->format('register_routes_extension'), RegisterRoutesExtension::class)
-            ->addArgument(new Reference($diUtils->format('route_client')))
-            ->addArgument(new Reference($diUtils->format('route_collection')))
-            ->addTag('enqueue.transport.consumption_extension')
-        ;
-
         $processorRegistryId = $diUtils->format('processor_registry');
         $container->register($processorRegistryId, ProcessorRegistry::class);
     }
