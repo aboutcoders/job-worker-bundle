@@ -126,6 +126,16 @@ The command `abc:routes:register` registers routes defined by a route provider o
 bin/console abc:process:job --help
 ```
 
+## Configuration Reference
+   
+```yaml
+abc_job_worker:
+    server_baseUrl: # Required (e.g. http://domain.tld/api/
+    default_queue: default
+    default_replyTo: reply
+```
+
+
 ## License
 
 The MIT License (MIT). Please see [License File](./LICENSE) for more information.

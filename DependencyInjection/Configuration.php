@@ -33,9 +33,6 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('default_replyTo')
                     ->defaultValue('reply')
                 ->end()
-                ->scalarNode('jobs')
-                    ->defaultNull()
-                ->end()
             ->end();
 
         return $tb;
