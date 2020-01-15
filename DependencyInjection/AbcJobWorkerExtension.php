@@ -3,10 +3,10 @@
 namespace Abc\JobWorkerBundle\DependencyInjection;
 
 use Abc\Job\Broker\RouteCollection;
-use Abc\Job\Client\HttpRouteClient;
+use Abc\Job\Client\JobClient;
+use Abc\Job\Client\JobHttpClient;
 use Abc\Job\Client\RouteClient;
 use Abc\Job\Client\RouteHttpClient;
-use Abc\Job\Enqueue\Consumption\RegisterRoutesExtension;
 use Abc\Job\Processor\ProcessorRegistry;
 use Abc\Job\Symfony\DiUtils;
 use GuzzleHttp\Client;
@@ -36,18 +36,35 @@ class AbcJobWorkerExtension extends Extension
             ->setFactory([RouteCollection::class, 'fromArray'])
         ;
 
-        // Client
-        $container->register($diUtils->format('http_route_client_client'), Client::class);
+        // Route Client
+        $container->register($diUtils->format('route_base_client'), Client::class);
 
-        $container->register($diUtils->format('http_route_client'), RouteHttpClient::class)
+        // RouteHttpClient
+        $container->register($diUtils->format('route_http_client'), RouteHttpClient::class)
             ->addArgument($config['server_baseUrl'])
-            ->addArgument(new Reference($diUtils->format('http_route_client_client')))
+            ->addArgument(new Reference($diUtils->format('route_base_client')))
         ;
 
         // RouteClient
         $container->register($diUtils->format('route_client'), RouteClient::class)
-            ->addArgument(new Reference($diUtils->format('http_route_client')))
+            ->addArgument(new Reference($diUtils->format('route_http_client')))
             ->addArgument(new Reference('logger'))
+        ;
+
+        // Job Client
+        $container->register($diUtils->format('job_base_client'), Client::class);
+
+        // JobHttpClient
+        $container->register($diUtils->format('job_http_client'), JobHttpClient::class)
+            ->addArgument($config['server_baseUrl'])
+            ->addArgument(new Reference($diUtils->format('job_base_client')))
+        ;
+
+        // JobClient
+        $container->register($diUtils->format('job_client'), JobClient::class)
+            ->addArgument(new Reference($diUtils->format('job_http_client')))
+            ->addArgument(new Reference('logger'))
+            ->setPublic(true);
         ;
 
         $processorRegistryId = $diUtils->format('processor_registry');

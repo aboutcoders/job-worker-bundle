@@ -24,19 +24,19 @@ abc_job_worker:
 
 services:
 
-  app.http_route_client.mock_handler:
+  app.route_http_client.mock_handler:
     class: GuzzleHttp\Handler\MockHandler
     public: true
 
-  app.http_route_client.handler_stack:
+  app.route_http_client.handler_stack:
     class: GuzzleHttp\HandlerStack
     public: true
-    arguments: ['@app.http_route_client.mock_handler']
+    arguments: ['@app.route_http_client.mock_handler']
 
-  abc.job.http_route_client_client:
+  abc.job.route_base_client:
     class: GuzzleHttp\Client
     arguments:
-      - { handler: '@app.http_route_client.handler_stack' }
+      - { handler: '@app.route_http_client.handler_stack' }
 
   app.jobA:
     class: Abc\Job\Processor\TestProcessor

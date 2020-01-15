@@ -66,7 +66,7 @@ class ProcessQueueCommandTest extends KernelTestCase
 
         $response = new Response(200, [], $json);
 
-        $mockHandler = static::$container->get('app.http_route_client.mock_handler');
+        $mockHandler = static::$container->get('app.route_http_client.mock_handler');
         $mockHandler->append($response);
     }
 }

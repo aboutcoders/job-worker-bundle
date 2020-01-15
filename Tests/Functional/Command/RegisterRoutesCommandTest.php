@@ -2,7 +2,6 @@
 
 namespace Abc\JobWorkerBundle\Tests\Functional\Command;
 
-use Abc\Job\Broker\Route;
 use Abc\JobWorkerBundle\Tests\Functional\KernelTestCase;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -42,7 +41,7 @@ class RegisterRoutesCommandTest extends KernelTestCase
     {
         $response = new Response(204, []);
 
-        $mockHandler = static::$container->get('app.http_route_client.mock_handler');
+        $mockHandler = static::$container->get('app.route_http_client.mock_handler');
         $mockHandler->append($response);
     }
 }
