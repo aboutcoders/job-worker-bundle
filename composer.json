@@ -14,7 +14,7 @@
   "require": {
     "php": "^7.1",
     "symfony/framework-bundle": "^4.3|^5",
-    "abc/job": "dev-master"
+    "abc/job": "^0.1"
   },
   "require-dev": {
     "phpunit/phpunit": "^7.0",
