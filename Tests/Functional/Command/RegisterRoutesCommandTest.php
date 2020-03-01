@@ -34,7 +34,7 @@ class RegisterRoutesCommandTest extends KernelTestCase
         // the output of the command in the console
         $output = $commandTester->getDisplay();
 
-        $this->assertContains('No routes defined', $output);
+        $this->assertStringContainsString('No routes defined', $output);
     }
 
     protected function mockRouteClientResponse(): void
