@@ -17,10 +17,12 @@ composer require abc/job-worker-bundle
 ```
 
 ## Configuration Reference
-
+   
 ```yaml
 abc_job_worker:
-    server_baseUrl: 'http://domain.tld/job'
+    server_baseUrl: # Required (e.g. http://domain.tld/api/
+    default_queue: default
+    default_replyTo: reply
 ```
 
 ## Getting Started
@@ -96,45 +98,37 @@ App\JobRoutes:
         - { name: 'abc.job.route_provider'}
 ```
 
+## Commands
+
 ### Process jobs
 
-There are two commands to process a job: `abc:process:queue` and `abc:process:job`. 
+There are two commands to process a job: `abc:queue:process` and `abc:job:process`. 
 
-### Command `abc:process:queue`
+### Command `abc:job:process`
 
-The command `abc:process:queue` processes jobs one or more queues. It will process all jobs that have been registered.
+The command `abc:job:process` processes one or more specific jobs, that have to be specified by name. You can provide a single job name or an array of job names as argument.
 
 ```bash
-bin/console abc:process:queue --help
+bin/console abc:job:process --help
+```
+
+### Command `abc:queue:process`
+
+The command `abc:queue:process` processes jobs one or more queues. It will process all jobs that have been registered.
+
+```bash
+bin/console abc:queue:process --help
 ```
 
 You can provide a single queue name or an array of queues as argument.
-
-### Command `abc:process:job`
-
-The command `abc:process:job` processes one or more specific jobs, that have to be specified by name. You can provide a single job name or an array of job names as argument.
-
-```bash
-bin/console abc:process:job --help
-```
 
 ### Command `abc:routes:register`
 
 The command `abc:routes:register` registers routes defined by a route provider on the server. Existing routes are overwritten but not deleted.
 
 ```bash
-bin/console abc:process:job --help
+bin/console abc:routes:register --help
 ```
-
-## Configuration Reference
-   
-```yaml
-abc_job_worker:
-    server_baseUrl: # Required (e.g. http://domain.tld/api/
-    default_queue: default
-    default_replyTo: reply
-```
-
 
 ## License
 
