@@ -3,6 +3,7 @@
 namespace Abc\JobWorkerBundle\Tests\Functional\Command;
 
 use Abc\Job\Broker\Route;
+use Abc\Job\Symfony\Command\ProcessQueueCommand;
 use Abc\JobWorkerBundle\Tests\Functional\KernelTestCase;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -16,6 +17,14 @@ class ProcessQueueCommandTest extends KernelTestCase
         static::bootKernel();
     }
 
+    public function testAlias()
+    {
+        $application = new Application(static::$kernel);
+
+        $command = $application->find('abc:process:queue');
+        $this->assertInstanceOf(ProcessQueueCommand::class, $command);
+    }
+
     public function testExecute()
     {
         $application = new Application(static::$kernel);
@@ -23,7 +32,7 @@ class ProcessQueueCommandTest extends KernelTestCase
         $timestamp = strtotime('yesterday');
         $timeLimit = new \DateTime("@$timestamp");
 
-        $command = $application->find('abc:process:queue');
+        $command = $application->find('abc:queue:process');
 
         $input = [
             'command' => $command->getName(),

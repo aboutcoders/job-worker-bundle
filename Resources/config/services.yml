@@ -14,6 +14,7 @@ services:
             - '@enqueue.transport.consume_command'
         tags:
             - { name: 'console.command' }
+            - { name: 'console.command', command: 'abc:process:queue' }
 
     abc.job.process_job_command:
         class: 'Abc\Job\Symfony\Command\ProcessJobCommand'
@@ -24,11 +25,20 @@ services:
             - '@enqueue.transport.consume_command'
         tags:
             - { name: 'console.command' }
+            - { name: 'console.command', command: 'abc:process:job' }
 
     abc.job.register_routes_command:
         class: 'Abc\Job\Symfony\Command\RegisterRoutesCommand'
         arguments:
             - '@abc.job.route_client'
             - '@abc.job.route_collection'
+        tags:
+            - { name: 'console.command' }
+
+    abc.job.setup_broker_command:
+        class: 'Abc\Job\Symfony\Command\SetupBrokerCommand'
+        arguments:
+            - '@abc.job.broker_registry'
+
         tags:
             - { name: 'console.command' }

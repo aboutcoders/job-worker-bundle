@@ -24,6 +24,20 @@ abc_job_worker:
 
 services:
 
+  app.broker_http_client.mock_handler:
+    class: GuzzleHttp\Handler\MockHandler
+    public: true
+
+  app.broker_http_client.handler_stack:
+    class: GuzzleHttp\HandlerStack
+    public: true
+    arguments: ['@app.broker_http_client.mock_handler']
+
+  abc.job.broker_base_client:
+    class: GuzzleHttp\Client
+    arguments:
+      - { handler: '@app.broker_http_client.handler_stack' }
+
   app.route_http_client.mock_handler:
     class: GuzzleHttp\Handler\MockHandler
     public: true
