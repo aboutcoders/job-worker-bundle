@@ -100,10 +100,6 @@ App\JobRoutes:
 
 ## Commands
 
-### Process jobs
-
-There are two commands to process a job: `abc:queue:process` and `abc:job:process`. 
-
 ### Command `abc:job:process`
 
 The command `abc:job:process` processes one or more specific jobs, that have to be specified by name. You can provide a single job name or an array of job names as argument.
@@ -128,6 +124,14 @@ The command `abc:routes:register` registers routes defined by a route provider o
 
 ```bash
 bin/console abc:routes:register --help
+```
+
+### Command `abc:broker:setup`
+
+The command `abc:broker:setup` declares queues at the broker for all registered routes.
+
+```bash
+bin/console abc:broker:setup --help
 ```
 
 ## License
